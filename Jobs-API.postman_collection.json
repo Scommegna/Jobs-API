@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "2d15250d-1483-4c31-9705-73c914dd1261",
+		"name": "Jobs-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28636390"
+	},
+	"item": [
+		{
+			"name": "Register user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()\r",
+							"pm.globals.set(\"accessToken\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"peter\",\r\n    \"email\": \"peter@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth/register",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logs user in",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()\r",
+							"pm.globals.set(\"accessToken\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"lucas16@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new Job",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGM4MTYwM2EzZTYxODM1YTBlN2YyYTUiLCJuYW1lIjoibHVjYXMiLCJpYXQiOjE2OTA4MzQ0MzUsImV4cCI6MTY5MzQyNjQzNX0.UcCW_z2G9mSDdVwNId4rhxlapKfC4XvgOpC60x9iYNg",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company\": \"facebook\",\r\n    \"position\": \"back-end\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/jobs",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Searches for all jobs of one user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGM4MTYwM2EzZTYxODM1YTBlN2YyYTUiLCJuYW1lIjoibHVjYXMiLCJpYXQiOjE2OTA4MzQ0MzUsImV4cCI6MTY5MzQyNjQzNX0.UcCW_z2G9mSDdVwNId4rhxlapKfC4XvgOpC60x9iYNg",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/jobs",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user job by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/jobs/64c933e5b9889451ccbabe7f",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						"64c933e5b9889451ccbabe7f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update job data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company\": \"google\",\r\n    \"position\": \"back-end\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/jobs/64c933e5b9889451ccbabe7f",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						"64c933e5b9889451ccbabe7f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete job by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/jobs/64c933e5b9889451ccbabe7f",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						"64c933e5b9889451ccbabe7f"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
